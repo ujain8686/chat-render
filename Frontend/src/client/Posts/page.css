@@ -1,0 +1,98 @@
+:root {
+  --red: rgb(136, 27, 27);
+}
+
+.login-container {
+  border: 1px solid var(--red);
+  height: 100%;
+}
+
+.login {
+  display: block;
+  background-color: var(--red);
+  padding: 10px;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.login-container input {
+  display: block;
+  margin: 10px;
+  padding: 10px;
+}
+.login-container button {
+  background-color: var(--red);
+  color: white;
+  margin-bottom: 10px;
+}
+
+.posts-container{
+  height: 100%;
+  position: relative;
+}
+
+.posts{
+  height: 80%;
+}
+
+.card {
+  height: 50%;
+  width: 200px;
+  border: 1px solid var(--red);
+  padding: 0;
+}
+
+.card > img {
+  height: 60%;
+  width: 100%;
+}
+
+.userinfo{
+  height: 25%;
+  display: flex;
+  align-items: center;
+}
+
+.userinfo img{
+  border-radius: 50%;
+  height: 80%;
+  width: 20%;
+  margin-right: 10px; 
+}
+
+.icons{
+  height: 5%;
+  display: flex;
+}
+
+.navbarr{
+  height: 20%;
+  width: 100%;
+  background-color: var(--red);
+  color: white;
+}
+
+.not{
+  position: relative;
+}
+
+.count{
+  position: absolute;
+  top: -2px;
+  right: -5px;
+  color: white;
+  background-color: red;
+  border-radius: 50px;
+  font-size: 5px;
+  padding: 2px; 
+}
+
+.notifications{
+  position: absolute;
+  top: 5%;
+  right: 0;
+  height: 200px;
+  width: 150px;
+  background-color: white;
+}
