@@ -4,7 +4,7 @@ import Card from "./Card";
 import { posts } from "./data";
 import { io } from "socket.io-client";
 
-let socket = io("http://localhost:3001");
+// let socket = io("http://localhost:3001");
 
 const Login = () => {
   const [username, sestUsername] = useState("");
