@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import io from "socket.io-client";
+import "./socket.css"
 
 const socket = io.connect("https://chat-render-hrm1.onrender.com");
 
@@ -46,12 +47,12 @@ const Socket = () => {
   }, []);
 
   return (
-    <div style={{display: "flex"}}>
-      <div style={{margin: "0px 10px"}}>
+    <div className="container">
+      <div style={{ margin: "0px 10px" }}>
         <h1>Welcome to Chat Rooms!! </h1>
         <h2>Created by Ujjwal Jain</h2>
-        <form onSubmit={joinRoom}>
-          <label htmlFor="room">Enter room number: </label>
+        <form onSubmit={joinRoom} className="room-form">
+          {/* <label htmlFor="room">Enter room number: </label> */}
           <br />
           <input
             type="number"
@@ -59,63 +60,53 @@ const Socket = () => {
             onChange={(e) => setRoomNumber(e.target.value)}
             value={roomNumber}
             readOnly={isInRoom}
+            placeholder="Enter room number.."
+            className="msg-input"
           />
-          <button disabled={isInRoom}>
-            {isInRoom ? "Joined" : "Join Room"}
+          <button disabled={isInRoom || roomNumber == ""} className="button-23">
+            {isInRoom ? "Joined" : "Join"}
           </button>
         </form>
 
         <br />
         <br />
         <br />
-        <form onSubmit={sendMessage}>
-          <label htmlFor="messageBox">Type your message here :</label>
-          <br />
-          <input
-            type="text"
-            id="messageBox"
-            onChange={(e) => setInput(e.target.value)}
-            value={input}
-          />
-          <button disabled={!isInRoom}>Send Message</button>
-        </form>
       </div>
-      <div>
-        <h1>Messages: </h1>
-        <br />
+      <div className="messages-container">
+        <div className="heading">
+        <h3>Chats... </h3>
+        </div>
         <div
-          style={{
-            border: "1px solid black",
-            display: "flex",
-            flexDirection: "column",
-            minHeight: 100,
-            height: "auto",
-            width: "600px",
-            padding: 20,
-          }}
+        className="msgs"
         >
           {messages.map((msg) => {
             return (
-              <p
-                style={
+              
+              <span
+                className={
                   msg.userID == userID
-                    ? {
-                        color: "red",
-                        textAlign: "right",
-                        overflowWrap: "break-word",
-                      }
-                    : {
-                        color: "blue",
-                        textAlign: "left",
-                        overflowWrap: "break-word",
-                      }
+                    ? "msg-right" : "msg-left"
                 }
                 key={Math.random()}
               >
                 {msg.message}
-              </p>
+              </span>
             );
           })}
+          <form onSubmit={sendMessage} className="msg-form">
+            {/* <label htmlFor="messageBox">Type your message here :</label> */}
+            {/* <br /> */}
+            <input
+              type="text"
+              id="messageBox"
+              className="msg-input"
+              onChange={(e) => setInput(e.target.value)}
+              value={input}
+              placeholder="Enter your message..."
+              disabled={roomNumber==""}
+            />
+            <button disabled={!isInRoom} className="button-23"><span className="btn-span">Send</span></button>
+          </form>
         </div>
       </div>
     </div>
