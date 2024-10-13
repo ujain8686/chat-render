@@ -37,7 +37,7 @@ const Socket = () => {
   };
 
   useEffect(() => {
-    Notification.requestPermission();
+    Notification.requestPermission().then((per) => console.log(per)).catch((err)=>console.log(err));
     socket.on("receive_message", (newMessage) => {
       if (Notification.permission == "granted") {
         new Notification("New message...", { body: newMessage.message });
