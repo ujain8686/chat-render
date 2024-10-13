@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import io from "socket.io-client";
-import "./socket.css"
+import "./socket.css";
 
 const socket = io.connect("https://chat-render-hrm1.onrender.com");
 
@@ -37,7 +37,11 @@ const Socket = () => {
   };
 
   useEffect(() => {
+    Notification.requestPermission();
     socket.on("receive_message", (newMessage) => {
+      if (Notification.permission == "granted") {
+        new Notification("New message...", { body: newMessage.message });
+      }
       setMessages((prevMessages) => [...prevMessages, newMessage]);
     });
 
@@ -74,19 +78,13 @@ const Socket = () => {
       </div>
       <div className="messages-container">
         <div className="heading">
-        <h3>Chats... </h3>
+          <h3>Chats... </h3>
         </div>
-        <div
-        className="msgs"
-        >
+        <div className="msgs">
           {messages.map((msg) => {
             return (
-              
               <span
-                className={
-                  msg.userID == userID
-                    ? "msg-right" : "msg-left"
-                }
+                className={msg.userID == userID ? "msg-right" : "msg-left"}
                 key={Math.random()}
               >
                 {msg.message}
@@ -103,9 +101,11 @@ const Socket = () => {
               onChange={(e) => setInput(e.target.value)}
               value={input}
               placeholder="Enter your message..."
-              disabled={roomNumber==""}
+              disabled={roomNumber == ""}
             />
-            <button disabled={!isInRoom} className="button-23"><span className="btn-span">Send</span></button>
+            <button disabled={!isInRoom} className="button-23">
+              <span className="btn-span">Send</span>
+            </button>
           </form>
         </div>
       </div>
